@@ -14,10 +14,12 @@ using namespace std;
 #define STUDENT_MODIFY 5
 #define output (cout <<setiosflags(ios::left)<<setfill(' ')<<setw(20) )
 #define cr setfill(' ') << setw(10)
+
 Student::Student(){}
 string Student::getName(){ return name; }
 string Student::getNo(){ return no; }
 extern void welcome();
+
 void Student::setInformation(string name, string no, int age, string sex, string address, CourseGrade score)
 {
 	this->name = name;
@@ -30,6 +32,32 @@ void Student::setInformation(string name, string no, int age, string sex, string
 void Student::updateStudentInformation(int type, string information){//ÊäÈëÑ§ÉúĞÅÏ¢Õâ¼şÊÂÓ¦¸ÃÓÉÑ§ÉúÀà×Ô¼ºÀ´×ö
 	switch (type){
 	case 3:
+		no = information;//ÄÃµ½Ñ§ºÅ
+		while (true){
+			output << "ÇëÊäÈëÄêÁä: ";
+			std::cin >> this->age;
+			if (age <= 200 && age >= 1){
+				break;
+			}
+			else {
+				cout << "ÄãÊäÈëµÄÄêÁä²»ºÏ·¨" << endl;
+			}
+		}
+		while (true){
+			output << "ÇëÊäÈëĞÔ±ğ(ÄĞ/Å®): ";
+			std::cin >> this->sex;
+			if (sex == "ÄĞ" || sex == "Å®"){
+				break;
+			}
+			else{
+				cout << "ÄãÊäÈëµÄĞÔ±ğÓĞÎó!" << endl;
+			}
+		}
+		
+		output << "ÇëÊäÈëËŞÉáµØÖ·: ";
+		std::cin >> this->address;
+		break;
+	case 6:
 		no = information;//ÄÃµ½Ñ§ºÅ
 		output << "ÇëÊäÈëĞÕÃû: ";
 		std::cin >> this->name;
@@ -50,46 +78,45 @@ void Student::updateStudentInformation(int type, string information){//ÊäÈëÑ§ÉúĞ
 				break;
 			}
 			else{
-				cout << "ÄãÊäÈëµÄÄêÁäÓĞÎó!" << endl;
+				cout << "ÄãÊäÈëµÄĞÔ±ğÓĞÎó!" << endl;
 			}
 		}
-		
+
 		output << "ÇëÊäÈëËŞÉáµØÖ·: ";
 		std::cin >> this->address;
 
 		string csgrade;
 		while(true){
-			output << "ÇëÊäÈë¼ÆËã»ú³É¼¨: ";
-			std::cin >> csgrade;
-			if (isCorrect(csgrade)){
-				break;
-			}
+		output << "ÇëÊäÈë¼ÆËã»ú³É¼¨: ";
+		std::cin >> csgrade;
+		if (isCorrect(csgrade)){
+		break;
+		}
 		}
 		this->score.setComputer(csgrade);
-		
+
 		string mathgrade;
 		while (true){
-			output << "ÇëÊäÈëÊıÑ§³É¼¨: ";
-			std::cin >> mathgrade;
-			if (isCorrect(mathgrade)){
-				break;
-			}
+		output << "ÇëÊäÈëÊıÑ§³É¼¨: ";
+		std::cin >> mathgrade;
+		if (isCorrect(mathgrade)){
+		break;
 		}
-		
+		}
+
 		this->score.setMath(mathgrade);
 		string englishgrade;
 		while (true){
-			output << "ÇëÊäÈëÓ¢Óï³É¼¨: ";
-			std::cin >> englishgrade;
-			if (isCorrect(englishgrade)){
-				break;
-			}
+		output << "ÇëÊäÈëÓ¢Óï³É¼¨: ";
+		std::cin >> englishgrade;
+		if (isCorrect(englishgrade)){
+		break;
+		}
 		}
 		this->score.setEnglish(englishgrade);
 		break;
 	}
 }
-
 bool Student::isCorrect(string grade){
 	int sum = 0;
 	int len = grade.length();
@@ -199,16 +226,15 @@ void Student::menu(){
 		}
 	}
 }
-
 void Student::showSingleStudentInformation()
 {
     Administrator::showLine();
 	std::cout   << cr<< no << "©¦" 
 				<< cr <<  name << "©¦" 
 				<< cr <<  age << "©¦" 
-				<< cr << sex << "©¦" 
+				<< cr <<  sex << "©¦" 
 				<< cr <<  address << "©¦" 
-				<< cr << score.getComputer() << "©¦" 
+				<< cr <<  score.getComputer() << "©¦" 
 				<< cr <<  score.getMath() << "©¦" 
 				<< cr <<  score.getEnglish() << "©¦" << endl;
 }

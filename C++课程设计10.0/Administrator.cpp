@@ -2,8 +2,6 @@
 #include"Administrator.h"
 #include"CourseGrade.h"
 #include"Student.h"
-
-#include<string>
 #include<fstream>
 #include<ctime>
 #include<windows.h>
@@ -11,14 +9,15 @@
 #include<conio.h>
 #include<iomanip>
 #include<iostream>
-
+#include<string>
 using namespace std;
 
+#define SHOW_ALL_STUDENT_INFORMATION 1
 #define EXITST_NO 2
 #define STUDENT_MODIFY 5
 #define ADMINISTRATOR_MODIFY 6
 #define output (cout <<setiosflags(ios::left)<<setfill(' ')<<setw(20) )
-#define cr setfill(' ') << setw(12)
+#define cr     setfill(' ') << setw(12)
 
 extern void welcome();
 
@@ -57,7 +56,7 @@ void Administrator::add()                           //录入学生信息函数
 			}
 		}
 		else {//如果该学生存在
-			std::cout << "该学生已存在，请核对信息后再来添加!\n\n";
+			cout << "该学生已存在，请核对信息后再来添加!\n\n";
 			std::cout << "1.返回主菜单\n2.继续添加 ------- ";
 			std::cin >> choose;
 			while (choose != 1 && choose != 2)
@@ -165,7 +164,7 @@ void Administrator::menu()
 		case '1': add(); break;
 		case '2': modify(ADMINISTRATOR_MODIFY); break;
 		case '3': delete_(); break;
-		case '4': showAllStudentInformation(1); break;
+		case '4': showAllStudentInformation(SHOW_ALL_STUDENT_INFORMATION); break;
 		case '5': search(); break;
 		case '6': return;
 		default:
@@ -184,7 +183,7 @@ void Administrator::modify(int type)                 //修改学生信息函数
 		//只能按学号修改
 		cout << "请输入你要修改学生信息的学号: ";
 		int type = 3;
-		bool exist = searchByNo(type);
+		bool exist = searchByNo(ADMINISTRATOR_MODIFY);
 		if (!exist){
 			cout << "无该学生的信息,请核对你输入的学号!!" << endl;
 			goOn();
@@ -215,7 +214,6 @@ void Administrator::read()                       //读取学生信息函数
 	}
 	is.close();
 }
-
 void Administrator::save()                                 //保存学生信息函数
 {
 	ofstream of("Student.txt", ios::out);
@@ -228,8 +226,6 @@ void Administrator::save()                                 //保存学生信息函数
 	}
 	of.close();
 }
-
-
 void Administrator::search()
 {
 	cout << "请输入你要搜索的学生信息的学号: ";
@@ -286,6 +282,9 @@ bool Administrator::searchByNo(int type){
 			case 4:
 				i->showSingleStudentInformation();
 				return true;
+			case 6:
+				i->updateStudentInformation(type, noTmp);
+				return true;
 			}
 		}
 	}
@@ -306,6 +305,9 @@ void Administrator::showAllStudentInformation(int user)
 				return;//修改完保存直接退出
 			}
 		}
+	}
+	else {
+		//if (ADMINISTRATOR_MODIFY==)
 	}
 	cout << resetiosflags(ios::left);
 	if (!student.empty()){
@@ -339,7 +341,6 @@ void Administrator::showAllStudentInformation(int user)
 		goOn();
 	}
 }
-
 inline  void Administrator::showLine(){
 	std::cout << "-----------------------------------------------------------------------------------------------" << endl;
 }
@@ -378,5 +379,3 @@ void Administrator::validate() {
 		}
 	}
 }
-
-

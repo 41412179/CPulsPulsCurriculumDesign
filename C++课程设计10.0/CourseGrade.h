@@ -4,6 +4,7 @@
 using namespace std;
 class CourseGrade
 {
+
 public :
 	string getComputer();
 	string getMath();

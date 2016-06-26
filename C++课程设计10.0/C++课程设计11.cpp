@@ -16,6 +16,7 @@ void studentLogin();
 void administratorLogin();
 extern void welcome();
 
+
 int main()
 {
 	int flag = 0;
@@ -88,8 +89,9 @@ void welcome(){//欢迎界面
 	}
 	std::cout << endl;
 	std::cout << "		欢迎登陆学生信息管理系统                    " << endl << endl;
+
 	std::cout << "     \t  当前时间: " << ctime(&t) << "" << endl;
-	std::cout << "   ";
+	std::cout << "     \t  作者:梁仲海 郭浩东" << endl;
 	for (int i = 0; i <= 60; i++) {
 		std::cout << char(6);
 	}
